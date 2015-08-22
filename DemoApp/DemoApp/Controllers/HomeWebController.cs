@@ -15,8 +15,9 @@ namespace DemoApp.Controllers
             {
                 return RedirectToAction("Login");
             }
+
             ViewBag.NumUsers = IpDictionary.Count;
-            var userInfo = new UserInfo { IpAddress = ipAddress,Username = username};
+            var userInfo = new UserInfo { IpAddress = ipAddress, Username = username};
             return View(userInfo);
         }
 
@@ -30,15 +31,19 @@ namespace DemoApp.Controllers
         public ActionResult LoginUser(string name)
         {
             var ipAddress = Request.UserHostAddress;
+            AddOrUpdateUser(name, ipAddress);
+            Hub.Clients.All.broadcastMessage("server", IpDictionary.Count);
 
+            return RedirectToAction("Index");
+        }
+
+        private static void AddOrUpdateUser(string name, string ipAddress)
+        {
             if (IpDictionary.ContainsKey(ipAddress))
             {
                 IpDictionary.Remove(ipAddress);
             }
-            IpDictionary.Add(Request.UserHostAddress, name);
-            Hub.Clients.All.broadcastMessage("server", IpDictionary.Count);
-
-            return RedirectToAction("Index");
+            IpDictionary.Add(ipAddress, name);
         }
 
         private string LookupUsername(string ipAddress)
