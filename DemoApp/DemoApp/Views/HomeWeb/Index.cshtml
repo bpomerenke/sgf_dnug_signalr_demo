@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <strong>Messages</strong>
-            <div id="message-container"></div>
+            <ul id="message-container"></ul>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <strong>Dots</strong>
@@ -44,6 +44,12 @@
         var dot = $.connection.dotHub;
         dot.client.broadcastMessage = function (name, message) {
             $('#dot-container').append(".");
+        };
+        var messages = $.connection.messagesHub;
+        messages.client.broadcastMessage = function (name, message) {
+            var msgItem = $('<li />')
+                            .html(name + ' - ' + message);
+            $('#message-container').append(msgItem);
         };
 
         // Start the connection.

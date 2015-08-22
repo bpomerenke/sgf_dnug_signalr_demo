@@ -16,5 +16,23 @@ namespace DemoApp.Controllers
         {
             get { return hub.Value; }
         }
+
+       
+        internal string GetUsername()
+        {
+            var ipAddress = GetIpAddress();
+            if (HomeWebController.IpDictionary.ContainsKey(ipAddress))
+            {
+                return HomeWebController.IpDictionary[ipAddress];
+            }
+            return null;
+        }
+
+        private string GetIpAddress()
+        {
+            dynamic ipProp = Request.Properties["MS_HttpContext"];
+            var ipAddress = ipProp.Request.UserHostAddress;
+            return ipAddress;
+        }
     }
 }
