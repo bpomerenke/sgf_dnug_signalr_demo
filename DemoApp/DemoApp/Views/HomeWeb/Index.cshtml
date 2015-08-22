@@ -60,6 +60,10 @@
                             .html(name + ' - ' + message);
             $('#message-container').append(msgItem);
         };
+        var users = $.connection.userHub;
+        users.client.broadcastMessage = function (name, message) {
+            $('#user-count').html(message);
+        };
 
         // Start the connection.
         $.connection.hub.start().done(function () {

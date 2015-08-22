@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using DemoApp.Hubs;
 
 namespace DemoApp.Controllers
 {
-    public class HomeWebController : Controller
+    public class HomeWebController : MvcControllerWithHub<UserHub>
     {
         public static Dictionary<string,string> IpDictionary = new Dictionary<string, string>(); 
         public ActionResult Index()
@@ -14,6 +15,7 @@ namespace DemoApp.Controllers
             {
                 return RedirectToAction("Login");
             }
+            ViewBag.NumUsers = IpDictionary.Count;
             var userInfo = new UserInfo { IpAddress = ipAddress,Username = username};
             return View(userInfo);
         }
@@ -34,6 +36,8 @@ namespace DemoApp.Controllers
                 IpDictionary.Remove(ipAddress);
             }
             IpDictionary.Add(Request.UserHostAddress, name);
+            Hub.Clients.All.broadcastMessage("server", IpDictionary.Count);
+
             return RedirectToAction("Index");
         }
 

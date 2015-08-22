@@ -154,6 +154,7 @@
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\InfoWebController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\MvcControllerWithHub.cs" />
     <Compile Include="Controllers\TileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -161,6 +162,7 @@
     <Compile Include="Hubs\DotHub.cs" />
     <Compile Include="Hubs\MessagesHub.cs" />
     <Compile Include="Hubs\TileHub.cs" />
+    <Compile Include="Hubs\UserHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
