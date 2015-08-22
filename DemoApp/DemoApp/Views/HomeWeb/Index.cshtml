@@ -21,6 +21,26 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <strong>Dots</strong>
+            <div id="tile-container"></div>
         </div>
     </div>
+    <script src="~/Scripts/jquery-1.9.1.js" ></script>
+    <script src="~/Scripts/bootstrap.js" ></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        var tile = $.connection.tileHub;
+        tile.client.broadcastMessage = function (name, message) {
+            var newTile = $('<div />')
+                            .addClass('label')
+                            .attr('style', 'background-color:' + message)
+                            .html('&nbsp;');
+
+            $('#tile-container').append(newTile);
+        };
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            //nothing yet
+        });
+    </script>
 </div>
