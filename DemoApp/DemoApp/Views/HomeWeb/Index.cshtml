@@ -52,7 +52,7 @@
 
         var dot = $.connection.dotHub;
         dot.client.broadcastMessage = function (name, message) {
-            $('#dot-container').append(".");
+            $('#dot-container').append(". ");
         };
         var messages = $.connection.messagesHub;
         messages.client.broadcastMessage = function (name, message) {
