@@ -1,4 +1,8 @@
-﻿@{
+﻿@model DemoApp.Controllers.UserInfo
+@{
     Layout = "../Shared/Layout.cshtml";
 }
-<h2>Home</h2>
+<div class="well pull-right">
+    <p><strong>User information:</strong></p>
+    <p>@(Model.Username ?? "unknown") - @Model.IpAddress</p>
+</div>
