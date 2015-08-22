@@ -40,9 +40,17 @@
 
             $('#tile-container').append(newTile);
         };
+
+        var dot = $.connection.dotHub;
+        dot.client.broadcastMessage = function (name, message) {
+            $('#dot-container').append(".");
+        };
+
         // Start the connection.
         $.connection.hub.start().done(function () {
             //nothing yet
         });
+
+
     </script>
 </div>
