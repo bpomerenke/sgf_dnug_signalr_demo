@@ -25,15 +25,15 @@ namespace DemoApp
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "InfoDefault",
+                name: "DefaultRoute",
                 url: "",
-                defaults: new { controller = "InfoWeb", action = "Info" }
+                defaults: new { controller = "HomeWeb", action = "Index" }
             );
 
             routes.MapRoute(
-                name: "InfoWebPage",
-                url: "info",
-                defaults: new { controller = "InfoWeb", action = "Info" }
+                name: "GenericWebRoute",
+                url: "{controller}/{action}",
+                defaults: new { controller = "HomeWeb", action = "Index" }
             );
 
         }
